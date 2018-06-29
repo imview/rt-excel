@@ -11,7 +11,7 @@ import java.util.List;
 public class AppTest {
     public static void main(String[] args) throws IOException, IllegalAccessException, InstantiationException {
         System.out.println(AppTest.class.getResource("/"));
-        ExcelWorksheet worksheet = new ExcelWorksheet(TestClass.class, "E:\\git\\rt-excel\\template.xls");
+        ExcelWorksheet worksheet = new ExcelWorksheet(TestClass.class, "template.xls");
 
         List<TestClass> list = worksheet.transform();
         list.forEach(m -> System.out.println(m.toString()));
