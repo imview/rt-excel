@@ -2,10 +2,10 @@
 多种自由组合方式，帮你轻松实现数据转换和校验<br>
 1.excel转换成自定义对象集合<br>
 2.excel转换成自定义对象集合+自定义转换规则<br>
-3.excel转换成自定义对象集合+自定义转换规则+验证单元格数据<br>
-4.excel转换成自定义对象集合+自定义转换规则+验证单元格数据+自定义验证规则<br>
-5.excel转换成自定义对象集合+验证单元格数据<br>
-6.excel转换成自定义对象集合+验证单元格数据+自定义验证规则<br>
+3.excel转换成自定义对象集合+自定义转换规则+单元格数据通用验证规则<br>
+4.excel转换成自定义对象集合+自定义转换规则+单元格数据通用验证规则+自定义验证规则<br>
+5.excel转换成自定义对象集合+单元格数据通用验证规则<br>
+6.excel转换成自定义对象集合+单元格数据通用验证规则+自定义验证规则<br>
 <br>
 ![image](https://raw.githubusercontent.com/roytian1217/rt-excel/master/doc/p3.png)<br>
 **注解的使用范围**<br>
@@ -42,13 +42,13 @@ list = worksheet.transform(m -> {
 list.forEach(m -> System.out.println(m.toString()));
 ```
 ![image](https://raw.githubusercontent.com/roytian1217/rt-excel/master/doc/p6.png)<br>
-**2.2.1 excel转换成自定义对象集合+验证单元格数据**
+**2.2.1 excel转换成自定义对象集合+单元格数据通用验证规则**
 ```Java
 List<TestClass> list2 = worksheet.check();
 list2.forEach(m -> System.out.println(m.toString()));
 ```
 ![image](https://raw.githubusercontent.com/roytian1217/rt-excel/master/doc/p7.png)<br>
-**2.2.2 excel转换成自定义对象集合+验证单元格数据+自定义验证规则**
+**2.2.2 excel转换成自定义对象集合+单元格数据通用验证规则+自定义验证规则**
 ```Java
 worksheet.getCell("column3").addChecker(event -> {
 	ServiceResult res = new ServiceResult();
@@ -66,7 +66,7 @@ list2 = worksheet.check();
 list2.forEach(m -> System.out.println(m.toString()));
 ```
 ![image](https://raw.githubusercontent.com/roytian1217/rt-excel/master/doc/p8.png)<br>
-**2.2.3 excel转换成自定义对象集合+自定义转换规则+验证单元格数据+自定义验证规则**
+**2.2.3 excel转换成自定义对象集合+自定义转换规则+单元格数据通用验证规则+自定义验证规则**
 ```Java
 list2 = worksheet.check(m -> {
 	TestClass entity = ((TestClass) m);
