@@ -36,11 +36,11 @@ public class ExcelWorksheet<T extends BaseRowEntity> {
         this(t, pFilePath, 0, 0);
     }
 
-    public ExcelWorksheet(Class<T> t, String pFilePath, Integer pSheetIndex) throws IOException {
+    public ExcelWorksheet(Class<T> t, String pFilePath, int pSheetIndex) throws IOException {
         this(t, pFilePath, pSheetIndex, 0);
     }
 
-    public ExcelWorksheet(Class<T> t, String pFilePath, Integer pSheetIndex, int pTitleRowIndex) throws IOException {
+    public ExcelWorksheet(Class<T> t, String pFilePath, int pSheetIndex, int pTitleRowIndex) throws IOException {
         FileInputStream file = new FileInputStream(new File(pFilePath));
         if (StringUtils.isBlank(pFilePath)) {
             throw new RuntimeException("路径为空!");
