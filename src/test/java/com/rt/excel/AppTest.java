@@ -10,7 +10,6 @@ import java.util.List;
 
 public class AppTest {
     public static void main(String[] args) throws IOException, IllegalAccessException, InstantiationException {
-        System.out.println(AppTest.class.getResource("/"));
         ExcelWorksheet worksheet = new ExcelWorksheet(TestClass.class, "E:\\git\\rt-excel\\template.xls");
 
         List<TestClass> list = worksheet.transform();
@@ -18,9 +17,12 @@ public class AppTest {
 
         list = worksheet.transform(m -> {
             TestClass entity = ((TestClass) m);
-            entity.column1 = entity.column1 + "__postfix";
+            entity.column1 = entity.column1==null?"":entity.column1 + "__postfix";
         });
         list.forEach(m -> System.out.println(m.toString()));
+
+        List<TestClass> list2 = worksheet.check();
+        list2.forEach(m -> System.out.println(m.toString()));
 
         worksheet.getCell("column3").addChecker(event -> {
             ServiceResult res = new ServiceResult();
@@ -34,9 +36,12 @@ public class AppTest {
             }
             return res;
         });
-        List<TestClass> list2 = worksheet.check(m -> {
+        list2 = worksheet.check();
+        list2.forEach(m -> System.out.println(m.toString()));
+
+        list2 = worksheet.check(m -> {
             TestClass entity = ((TestClass) m);
-            entity.column1 = entity.column1 + "__postfix";
+            entity.column1 = entity.column1==null?"":entity.column1 + "__postfix";
         });
         list2.forEach(m -> System.out.println(m.toString()));
     }

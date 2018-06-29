@@ -22,22 +22,28 @@ public ExcelWorksheet(Class<T> t, String pFilePath, int pSheetIndex)
 public ExcelWorksheet(Class<T> t, String pFilePath, int pSheetIndex, int pTitleRowIndex)
 ```
 <br>
-2.1.1转换成自定义的对象<br>
+2.1.1转换成自定义的对象
 ```Java
 List<TestClass> list = worksheet.transform();
+list.forEach(m -> System.out.println(m.toString()));
 ```
-2.1.2转换成自定义对象并增加转换规则<br>
+![image](https://raw.githubusercontent.com/roytian1217/rt-excel/master/doc/p5.png)<br>
+2.1.2转换成自定义对象并增加转换规则
 ```Java
 list = worksheet.transform(m -> {
 	TestClass entity = ((TestClass) m);
-	entity.column1 = entity.column1 + "__postfix";
+	entity.column1 = entity.column1==null?"":entity.column1 + "__postfix";
 });
+list.forEach(m -> System.out.println(m.toString()));
 ```
-2.2.1转换成自定义的对象并验证单元格数据<br>
+![image](https://raw.githubusercontent.com/roytian1217/rt-excel/master/doc/p6.png)<br>
+2.2.1转换成自定义的对象并验证单元格数据
 ```Java
 List<TestClass> list2 = worksheet.check();
+list2.forEach(m -> System.out.println(m.toString()));
 ```
-2.2.2转换成自定义的对象并验证单元格数据+自定义验证规则<br>
+![image](https://raw.githubusercontent.com/roytian1217/rt-excel/master/doc/p7.png)<br>
+2.2.2转换成自定义的对象并验证单元格数据+自定义验证规则
 ```Java
 worksheet.getCell("column3").addChecker(event -> {
 	ServiceResult res = new ServiceResult();
@@ -52,14 +58,18 @@ worksheet.getCell("column3").addChecker(event -> {
 	return res;
 });
 list2 = worksheet.check();
+list2.forEach(m -> System.out.println(m.toString()));
 ```
-2.2.3转换成自定义的对象+增加转换规则+验证单元格数据+自定义验证规则<br>
+![image](https://raw.githubusercontent.com/roytian1217/rt-excel/master/doc/p8.png)<br>
+2.2.3转换成自定义的对象+增加转换规则+验证单元格数据+自定义验证规则
 ```Java
 list2 = worksheet.check(m -> {
 	TestClass entity = ((TestClass) m);
 	entity.column1 = entity.column1 + "__postfix";
 });
+list2.forEach(m -> System.out.println(m.toString()));
 ```
+![image](https://raw.githubusercontent.com/roytian1217/rt-excel/master/doc/p9.png)<br>
 <br>
 **联系方式**<br>
 QQ 373119611
