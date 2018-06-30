@@ -23,9 +23,9 @@ ExcelWorksheet worksheet = new ExcelWorksheet(TestClass.class, "template.xls");
 ```
 构造函数有三个重载方法
 ```Java
-public ExcelWorksheet(Class<T> t, String pFilePath)
-public ExcelWorksheet(Class<T> t, String pFilePath, int pSheetIndex)
-public ExcelWorksheet(Class<T> t, String pFilePath, int pSheetIndex, int pTitleRowIndex)
+public ExcelWorksheet(Class<T> clazz, String pFilePath)
+public ExcelWorksheet(Class<T> clazz, String pFilePath, int pSheetIndex)
+public ExcelWorksheet(Class<T> clazz, String pFilePath, int pSheetIndex, int pTitleRowIndex)
 ```
 **2.1.1 excel转换成自定义对象集合**
 ```Java

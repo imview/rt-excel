@@ -30,17 +30,17 @@ public class ExcelWorksheet<T extends BaseRowEntity> {
     private int sheetIndex;
     private int titleRowIndex;
 
-    private Class<T> t;
+    private Class<T> clazz;
 
-    public ExcelWorksheet(Class<T> t, String pFilePath) throws IOException {
-        this(t, pFilePath, 0, 0);
+    public ExcelWorksheet(Class<T> clazz, String pFilePath) throws IOException {
+        this(clazz, pFilePath, 0, 0);
     }
 
-    public ExcelWorksheet(Class<T> t, String pFilePath, int pSheetIndex) throws IOException {
-        this(t, pFilePath, pSheetIndex, 0);
+    public ExcelWorksheet(Class<T> clazz, String pFilePath, int pSheetIndex) throws IOException {
+        this(clazz, pFilePath, pSheetIndex, 0);
     }
 
-    public ExcelWorksheet(Class<T> t, String pFilePath, int pSheetIndex, int pTitleRowIndex) throws IOException {
+    public ExcelWorksheet(Class<T> clazz, String pFilePath, int pSheetIndex, int pTitleRowIndex) throws IOException {
         FileInputStream file = new FileInputStream(new File(pFilePath));
         if (StringUtils.isBlank(pFilePath)) {
             throw new RuntimeException("路径为空!");
@@ -57,7 +57,7 @@ public class ExcelWorksheet<T extends BaseRowEntity> {
         this.sheet = this.workbook.getSheetAt(pSheetIndex);
         this.sheetIndex = pSheetIndex;
         this.titleRowIndex = pTitleRowIndex;
-        this.t = t;
+        this.clazz = clazz;
         this.initCells();
     }
 
@@ -92,7 +92,7 @@ public class ExcelWorksheet<T extends BaseRowEntity> {
                 sheetColumns.add(new Object[]{i, row.getCell(i).getStringCellValue()});
             }
         }
-        Field[] fields = this.t.getDeclaredFields();
+        Field[] fields = this.clazz.getDeclaredFields();
         List<Object[]> annotationList = new ArrayList<>();
         for (Field field : fields) {
             ExcelCellAnnotation annotation = field.getAnnotation(ExcelCellAnnotation.class);
@@ -192,7 +192,7 @@ public class ExcelWorksheet<T extends BaseRowEntity> {
         List<T> list = new ArrayList<T>();
         for (int i = titleRowIndex + 1; i <= sheet.getLastRowNum(); i++) {
             Row row = this.sheet.getRow(i);
-            T entity = (T) this.t.newInstance();
+            T entity = (T) this.clazz.newInstance();
             int blankCount = 0;
             List<String> failedMessage = new ArrayList<>();
             for (ExcelCell cell : cells) {
